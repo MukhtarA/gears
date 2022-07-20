@@ -14,8 +14,23 @@ const initialState = {
         data: null,
         status: 'idle',
         error: null
+    },
+    checkIpList: {
+        data: null,
+        status: 'idle',
+        error: null
     }
+
 }
+
+export const checkIp = createAsyncThunk('ip/check', async (data) => {
+    return axios.get('https://api.parts-catalogs.com/v1/catalogs',
+        {
+            headers: {
+                Authorization: "OEM-API-54563777-0E09-4526-8FC3-96AE8439FD95"
+            }
+        }).then(response => response.data)
+})
 
 export const login = createAsyncThunk('login/register', async (data) => {
     return axios({
@@ -47,8 +62,6 @@ const loginSlice = createSlice({
         [login.rejected]: (state, action) => {
             handleRejected(state.loginList, action)
         },
-
-
         [register.pending]: (state) => {
             handlePending(state.loginList)
         },
@@ -58,9 +71,19 @@ const loginSlice = createSlice({
         },
         [register.rejected]: (state, action) => {
             handleRejected(state.loginList, action)
+        },
+        [checkIp.fulfilled]: (state, action) => {
+            state.checkIpList.data = action.payload
+            state.checkIpList.status = SUCCEEDED
+        },
+        [checkIp.rejected]: (state, action) => {
+            handleRejected(state.checkIpList, action)
         }
     }
 })
+
+
+export const selectorCheckError = (state) => state.loginSlice.checkIpList.error
 
 
 export default loginSlice.reducer
