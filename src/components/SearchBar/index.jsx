@@ -28,7 +28,7 @@ const SearchBar = () => {
     const onSearch = useCallback(({target}) => {
         setValue(target.value)
     }, [])
-
+    console.log(cart.length)
     useEffect(() => {
         dispatch(searchByNumber(searchValue))
     }, [dispatch, searchValue])
@@ -40,8 +40,7 @@ const SearchBar = () => {
                 <InputLabel placeholder="Введите артикул или VIN/номер кузова" value={searchValue} onChange={onSearch}/>
                 <SearchButton onClick={() => navigate('/search')}>Search</SearchButton>
             </InputWrapper>
-            <div style={{ height: '100%' }} onMouseOver={() => setCartHover((prev) => !prev)}>
-            <SubMenuWrapper style={{ position: "relative" }}>
+            <SubMenuWrapper onMouseOver={() => setCartHover((prev) => !prev)} style={{ position: "relative" }}>
                 <div style={{position: 'relative'}}>
                     <FontAwesomeIcon icon={faCartShopping} color="darkgray"/>
                     {cartItemsAmount ? <Pin>{cartItemsAmount}</Pin> : null}
@@ -51,13 +50,15 @@ const SearchBar = () => {
 
                 {cartHover && <CartModal onMouseOver={() => setCartHover((prev) => !prev)}
                                          onMouseOut={() => setCartHover((prev) => !prev)}>
-                    {cart?.map((item) =>
+                    {cart.length > 0 ? cart.map((item) =>
                         <div style={{ fontSize: 12, borderBottom: '1px solid grey' }}>
                             {item.count} X {item.data.brand} {item.data.description}
-                    </div>)}
+                        </div>)
+                        :
+                        <div>В корзине нет товаров</div>
+                    }
                 </CartModal>}
             </SubMenuWrapper>
-            </div>
         </MainWrapper>
     )
 }

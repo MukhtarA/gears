@@ -35,7 +35,7 @@ export const checkIp = createAsyncThunk('ip/check', async (data) => {
 export const login = createAsyncThunk('login/register', async (data) => {
     return axios({
         method: "post",
-        url: "https://salty-journey-46630.herokuapp.com/api/v2/registration",
+        url: "https://salty-journey-46630.herokuapp.com/api/v2/login",
         data: data,
     }).then(response => response.data)
 })
@@ -43,9 +43,9 @@ export const login = createAsyncThunk('login/register', async (data) => {
 export const register = createAsyncThunk('login/login', async (data) => {
     return axios({
         method: "post",
-        url: "https://salty-journey-46630.herokuapp.com/api/v2/login",
+        url: "https://salty-journey-46630.herokuapp.com/api/v2/registration",
         data: data,
-    }).then(response => response.data)
+    }).then(response => response.data).then(res => console.log(res))
 })
 
 const loginSlice = createSlice({
@@ -85,5 +85,6 @@ const loginSlice = createSlice({
 
 export const selectorCheckError = (state) => state.loginSlice.checkIpList.error
 
+export const selectorAccessToken = (state) => state.loginSlice.loginList.data?.access_token
 
 export default loginSlice.reducer

@@ -1,5 +1,5 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 
 import HomePage from './features/home-page'
 import LoginPage from "./features/login-page";
@@ -9,6 +9,8 @@ import SearchBar from "./components/SearchBar";
 import store from "./store";
 import SearchResultPage from "./features/search-result-page";
 import CartPage from "./features/cart-page";
+import {selectorAccessToken} from "./features/login-page/slice";
+import {useEffect} from "react";
 
 function App() {
     return (

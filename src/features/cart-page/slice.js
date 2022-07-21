@@ -13,6 +13,7 @@ const cartSlice = createSlice({
     reducers: {
         addToCart (state, action) {
             if(_.map(state.cart, (item) => item?.data?.id === action.payload?.data?.id  )){
+                console.log(state.cart, action.payload)
                 _.remove(state.cart, (item) => item?.data?.id === action.payload.data?.id)
 
                 if(action.payload.count > 0)

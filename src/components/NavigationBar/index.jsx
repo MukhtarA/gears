@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 import {LinkStyled, Nav, NavItem, NavMenu, FontAwesomeIconStyled, MenuWrapper} from "./style";
 import {useState} from "react";
@@ -6,6 +6,7 @@ import {useState} from "react";
 import logo from '../../assets/image/icon.jpeg'
 
 const NavigationBar = () => {
+    const navigate = useNavigate();
     const [isSidebarOpen, setSidebar] = useState(true)
 
     return(
@@ -18,7 +19,7 @@ const NavigationBar = () => {
             </NavMenu>
 
             <MenuWrapper>
-                <FontAwesomeIconStyled icon={faUser} color="darkgray" onClick={() => setSidebar(!isSidebarOpen)} />
+                <FontAwesomeIconStyled icon={faUser} color="darkgray" onClick={() => navigate('/login')} />
                 <FontAwesomeIconStyled icon={faBars} color="darkgray" onClick={() => setSidebar(!isSidebarOpen)} />
             </MenuWrapper>
         </Nav>

@@ -59,7 +59,7 @@ export const SubMenuWrapper = styled.div`
   border: 2px solid #26b049;
 
   @media (max-width: 768px) {
-    display: none;
+    display: ${({right}) => right ? 'flex' : 'none' };
   }
 `
 
