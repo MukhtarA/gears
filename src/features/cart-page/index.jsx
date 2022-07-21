@@ -1,9 +1,10 @@
+import {MainWrapper} from "../search-result-page/style";
 
 const CartPage = () =>  {
     return (
-        <div>
-            <p>home</p>
-        </div>
+        <MainWrapper>
+
+        </MainWrapper>
     );
 }
 

@@ -40,7 +40,7 @@ const SearchBar = () => {
                 <InputLabel placeholder="Введите артикул или VIN/номер кузова" value={searchValue} onChange={onSearch}/>
                 <SearchButton onClick={() => navigate('/search')}>Search</SearchButton>
             </InputWrapper>
-            <SubMenuWrapper onMouseOver={() => setCartHover((prev) => !prev)} style={{ position: "relative" }}>
+            <SubMenuWrapper onClick={() => navigate('/cart')} onMouseOver={() => setCartHover((prev) => !prev)} style={{ position: "relative" }}>
                 <div style={{position: 'relative'}}>
                     <FontAwesomeIcon icon={faCartShopping} color="darkgray"/>
                     {cartItemsAmount ? <Pin>{cartItemsAmount}</Pin> : null}

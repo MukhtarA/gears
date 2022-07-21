@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import {MainWrapper, Button} from "./style";
+import {MainWrapper, Button, HeadingWrapper, Input, InputWrapper} from "./style";
 import {useNavigate} from "react-router-dom";
 import {SearchButton} from "../../components/SearchBar/style";
 import {useDispatch} from "react-redux";
@@ -62,25 +62,25 @@ const LoginPage = () =>  {
     return (
         <MainWrapper>
 
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 40 }}>
+            <HeadingWrapper>
                 <h4 style={{ fontSize: 30, margin: 0 }}>{isLogin ? 'Вход' : 'Регистрация' }</h4>
                 <p style={{ color: 'blue', cursor: 'pointer', margin: 0 }} onClick={() => setIsLogin((prev) => !prev)} >{isLogin ? 'Регистрация' : 'Вход' }</p>
-            </div>
+            </HeadingWrapper>
             <div style={{ textAlign: 'center', marginTop: 30}}>
             {isLogin ?
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
-                    <input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
-                </div>
+                <InputWrapper>
+                    <Input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
+                    <Input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
+                </InputWrapper>
                 :
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
-                    <input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
-                    <input onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
-                    <input onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
-                    <input onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
-                    <input onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
-                </div>
+                <InputWrapper>
+                    <Input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
+                    <Input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
+                    <Input onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
+                    <Input onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
+                    <Input onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
+                    <Input onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
+                </InputWrapper>
             }
             <SearchButton style={{ padding: 10, marginTop: 10 }} onClick={() => handleSubmit()}>Отправить</SearchButton>
             </div>
