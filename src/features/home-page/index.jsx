@@ -7,13 +7,12 @@ const MainPage = () =>  {
     const accessToken = useSelector(selectorAccessToken)
 
     useEffect(() => {
-        sessionStorage.setItem('accessToken', accessToken)
+        sessionStorage.setItem('accessToken', JSON.stringify(accessToken))
     }, [accessToken])
 
     return (
         <div>
             <p>home</p>
-
         </div>
     );
 }

@@ -1,14 +1,17 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {MainWrapper, Button, HeadingWrapper, Input, InputWrapper} from "./style";
 import {useNavigate} from "react-router-dom";
 import {SearchButton} from "../../components/SearchBar/style";
-import {useDispatch} from "react-redux";
-import {login, register} from "./slice";
+import {useDispatch, useSelector} from "react-redux";
+import {login, register, selectorLoginStatus, selectorRegisterStatus} from "./slice";
+import {SUCCEEDED} from "../../constants/sliceConstants";
 
 const LoginPage = () =>  {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [isLogin, setIsLogin] = useState(false)
+    const loginStatus = useSelector(selectorLoginStatus)
+    const registrationStatus = useSelector(selectorRegisterStatus)
+    const [isLogin, setIsLogin] = useState(true)
     const [password, setPassword] = useState('')
     const [loginInput, setLogin] = useState('')
     const [iin, setIin] = useState('')
@@ -16,34 +19,12 @@ const LoginPage = () =>  {
     const [number, setNumber] = useState('')
     const [email, setEmail] = useState('')
 
-    console.log({
-        "username": loginInput,
-        "password": password,
-        "iin": iin,
-        "full_name": fullName,
-        "phone_number": number,
-        "role_id": 1,
-        "email": email,
-        "partner_id": 1
-    })
-    console.log(isLogin)
     const handleSubmit = useCallback(() => {
-        console.log({
-            "username": loginInput,
-            "password": password,
-            "iin": iin,
-            "full_name": fullName,
-            "phone_number": number,
-            "role_id": 1,
-            "email": email,
-            "partner_id": 1
-        })
         if (isLogin) {
             dispatch(login({
                 "username": loginInput,
                 "password": password
             }))
-            navigate('/')
         } else {
             dispatch(register({
                 "username": loginInput,
@@ -55,13 +36,19 @@ const LoginPage = () =>  {
                 "email": email,
                 "partner_id": 1
             }))
-            setIsLogin(!isLogin)
         }
-    }, [dispatch, navigate, isLogin, loginInput, password, iin, fullName, number, email])
+    }, [dispatch, isLogin, loginInput, password, iin, fullName, number, email])
+
+    useEffect(() => {
+        if (registrationStatus === SUCCEEDED){
+            setIsLogin(!isLogin)
+        }else if(loginStatus === SUCCEEDED){
+            navigate('/')
+        }
+    }, [registrationStatus, loginStatus, navigate, isLogin])
 
     return (
         <MainWrapper>
-
             <HeadingWrapper>
                 <h4 style={{ fontSize: 30, margin: 0 }}>{isLogin ? 'Вход' : 'Регистрация' }</h4>
                 <p style={{ color: 'blue', cursor: 'pointer', margin: 0 }} onClick={() => setIsLogin((prev) => !prev)} >{isLogin ? 'Регистрация' : 'Вход' }</p>

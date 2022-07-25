@@ -28,7 +28,7 @@ const SearchBar = () => {
     const onSearch = useCallback(({target}) => {
         setValue(target.value)
     }, [])
-    console.log(cart.length)
+
     useEffect(() => {
         dispatch(searchByNumber(searchValue))
     }, [dispatch, searchValue])
@@ -42,11 +42,11 @@ const SearchBar = () => {
             </InputWrapper>
             <SubMenuWrapper onClick={() => navigate('/cart')} onMouseOver={() => setCartHover((prev) => !prev)} style={{ position: "relative" }}>
                 <div style={{position: 'relative'}}>
-                    <FontAwesomeIcon icon={faCartShopping} color="darkgray"/>
+                    <FontAwesomeIcon icon={faCartShopping} color="#686868"/>
                     {cartItemsAmount ? <Pin>{cartItemsAmount}</Pin> : null}
                 </div>
-                <p style={{margin: 0, fontSize: 14, whiteSpace: 'nowrap', color: 'darkGray'}}>₸{new Intl.NumberFormat().format(cartPrice)}</p>
-                <FontAwesomeIcon icon={cartHover ? faChevronUp : faChevronDown} color="darkgray"/>
+                <p style={{margin: 0, fontSize: 14, whiteSpace: 'nowrap', color: '#686868'}}>₸{new Intl.NumberFormat().format(cartPrice)}</p>
+                <FontAwesomeIcon icon={cartHover ? faChevronUp : faChevronDown} color="#686868"/>
 
                 {cartHover && <CartModal onMouseOver={() => setCartHover((prev) => !prev)}
                                          onMouseOut={() => setCartHover((prev) => !prev)}>

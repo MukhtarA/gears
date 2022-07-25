@@ -85,6 +85,10 @@ const loginSlice = createSlice({
 
 export const selectorCheckError = (state) => state.loginSlice.checkIpList.error
 
+export const selectorLoginStatus = (state) => state.loginSlice.loginList.status
+
+export const selectorRegisterStatus = (state) => state.loginSlice.registerList.status
+
 export const selectorAccessToken = (state) => state.loginSlice.loginList.data?.access_token
 
 export default loginSlice.reducer

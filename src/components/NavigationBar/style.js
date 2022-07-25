@@ -8,6 +8,7 @@ export const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   height: 8vh;
+  background-color: #fff;
 
   @media (max-width: 768px){
     justify-content: space-between;
@@ -26,7 +27,7 @@ export const NavMenu = styled.ul`
     padding-top: 20px;
     top: 8vh;
     right: 0;
-    width: 50%;
+    width: 100%;
     height: 93vh;
     margin: 0;
     background-color: #fff;
@@ -44,7 +45,7 @@ export const NavItem = styled.li`
 
 export const LinkStyled = styled(Link)`
   text-decoration: none;
-  color: darkgray;
+  color: #686868;
 `
 
 export const FontAwesomeIconStyled = styled(FontAwesomeIcon)`

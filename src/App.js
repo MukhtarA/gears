@@ -11,18 +11,33 @@ import SearchResultPage from "./features/search-result-page";
 import CartPage from "./features/cart-page";
 import {selectorAccessToken} from "./features/login-page/slice";
 import {useEffect} from "react";
+import DeliveryInfoPage from "./features/delivery-info-page";
+import PaymentInfoPage from "./features/payment-info-page";
+import styled from "@emotion/styled";
+
+const HeaderBlock = styled.div`
+  @media (max-width: 768px) {
+    position: sticky;
+    width: 100%;
+    top: 0;
+  }
+`
 
 function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <NavigationBar/>
-                <SearchBar />
+                <HeaderBlock>
+                    <NavigationBar/>
+                    <SearchBar />
+                </HeaderBlock>
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/search" element={<SearchResultPage />} />
                     <Route path="/cart" element={<CartPage/>} />
+                    <Route path="delivery-info" element={<DeliveryInfoPage />} />
+                    <Route path="payment-info" element={<PaymentInfoPage />} />
                 </Routes>
             </BrowserRouter>
         </Provider>

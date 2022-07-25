@@ -7,6 +7,7 @@ export const MainWrapper = styled.div`
   justify-content: space-between;
   gap: 30px;
   padding: 20px 60px;
+  background-color: #fff;
 
   @media (max-width: 768px) {
     padding: 10px 30px;
@@ -28,7 +29,7 @@ export const InputLabel = styled.input`
   border-radius: 5px;
   border: 2px solid #26b049;
   padding: 0 10px;
-  color: darkgray;
+  color: #686868;
 `
 
 export const SearchButton = styled.button`
@@ -55,7 +56,7 @@ export const SubMenuWrapper = styled.div`
   justify-content: center;
   gap: 20px;
   cursor: pointer;
-  color: darkgray;
+  color: #686868;
   border: 2px solid #26b049;
 
   @media (max-width: 768px) {
