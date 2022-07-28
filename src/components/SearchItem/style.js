@@ -24,3 +24,7 @@ export const InfoWrapper = styled.div`
 export const ButtonWrapper = styled.div`
     
 `
+
+export const ItemStyled = styled.div`
+    flex: 0 0 120px;
+`

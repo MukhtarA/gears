@@ -17,7 +17,7 @@ export const Button = styled.button`
 export const ButtonPrimary = styled.button`
   flex: 1;
   width: 100%;
-  height: 30px;
+  height: 35px;
   text-decoration: none;
   border: 1px solid #d5d5d5;
   border-radius: 40px;
@@ -34,7 +34,7 @@ export const Count = styled.p`
   flex: 1;
   width: 100%;
   height: 100%;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-size: 13px;
   text-align: center;

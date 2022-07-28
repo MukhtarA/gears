@@ -77,7 +77,7 @@ export const Pin = styled.h6`
 `
 
 export const CartModal = styled.div`
-  width: inherit;
+  width: 82%;
   padding: 10px;
   border: 1px solid lightgray;
   position: absolute;

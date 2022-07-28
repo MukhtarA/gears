@@ -5,7 +5,7 @@ const CounterButton = ({handleAddToCart, inStock, data}) => {
     const [count, setCount] = useState(0)
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', gap: 10, marginTop: 20}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
             {inStock > 0 ?
                 <>
                     <div style={{display: 'flex', alignItems: 'center'}}>
@@ -16,7 +16,7 @@ const CounterButton = ({handleAddToCart, inStock, data}) => {
                     </div>
                     <ButtonPrimary onClick={handleAddToCart(data, count)}>Купить</ButtonPrimary>
                 </>
-                : <Count>Нет в наличии</Count>
+                : null
             }
         </div>
     )

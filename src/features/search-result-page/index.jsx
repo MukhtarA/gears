@@ -6,6 +6,7 @@ import {MainWrapper} from "./style";
 import SearchItem from "../../components/SearchItem";
 import {useCallback} from "react";
 import {addToCart, selectorCart} from "../cart-page/slice";
+import {ItemStyled} from "../../components/SearchItem/style";
 
 const SearchResultPage = () => {
     const dispatch = useDispatch()
@@ -18,16 +19,27 @@ const SearchResultPage = () => {
 
     return (
         <MainWrapper>
+            <SearchItem
+                type="header"
+                brand="Производитель"
+                price="Цена"
+                inStock="Осталось"
+                serialNumber="Артикул"
+                deliveryDays="Срок"
+                catalog="Склад"
+                rating="Рейтинг"
+
+            />
             {searchData && _.map(searchData, (item) =>
                 <SearchItem
                     key={item?.id}
                     brand={item?.brand}
-                    title={item?.detail_name}
                     price={item?.price}
                     inStock={item?.available}
-                    serialNumber={item?.description}
-                    maxDelivery={item?.days}
-                    minDelivery={item?.days}
+                    serialNumber={item?.partNumber}
+                    deliveryDays={item?.days}
+                    catalog={item?.catalog}
+                    rating={item?.rating}
                     data={item}
                     handleAddToCart={handleAddToCart}
 
