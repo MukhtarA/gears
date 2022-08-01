@@ -1,11 +1,27 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import _ from "lodash"
+import axios from "axios";
+import {handlePending, handleRejected} from "../../helpers";
+import {SUCCEEDED} from "../../constants/sliceConstants";
+import {login} from "../login-page/slice";
 
 const initialState = {
-    cart: []
+    cart: [],
+    addToCartList: {
+        data: null,
+        status: 'idle',
+        error: null
+    }
 }
 
 
+export const addItemToCart = createAsyncThunk('cart/add', async (data) => {
+    return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/add", data, {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
+})
 
 const cartSlice = createSlice({
     name: 'cartSlice',
@@ -22,7 +38,18 @@ const cartSlice = createSlice({
             }
         }
     },
-    extraReducers: {}
+    extraReducers: {
+        [addItemToCart.pending]: (state) => {
+            handlePending(state.addToCartList)
+        },
+        [addItemToCart.fulfilled]: (state, action) => {
+            state.addToCartList.data = action.payload
+            state.addToCartList.status = SUCCEEDED
+        },
+        [addItemToCart.rejected]: (state, action) => {
+            handleRejected(state.addToCartList, action)
+        }
+    }
 })
 
 export const selectorCart = (state) => state.cartSlice.cart

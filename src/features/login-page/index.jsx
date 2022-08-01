@@ -3,7 +3,7 @@ import {MainWrapper, Button, HeadingWrapper, Input, InputWrapper} from "./style"
 import {useNavigate} from "react-router-dom";
 import {SearchButton} from "../../components/SearchBar/style";
 import {useDispatch, useSelector} from "react-redux";
-import {login, register, selectorLoginStatus, selectorRegisterStatus} from "./slice";
+import {login, register, selectorAccessToken, selectorLoginStatus, selectorRegisterStatus} from "./slice";
 import {SUCCEEDED} from "../../constants/sliceConstants";
 
 const LoginPage = () =>  {
@@ -18,6 +18,7 @@ const LoginPage = () =>  {
     const [fullName, setFullName] = useState('')
     const [number, setNumber] = useState('')
     const [email, setEmail] = useState('')
+    const accessToken = useSelector(selectorAccessToken)
 
     const handleSubmit = useCallback(() => {
         if (isLogin) {
@@ -42,10 +43,11 @@ const LoginPage = () =>  {
     useEffect(() => {
         if (registrationStatus === SUCCEEDED){
             setIsLogin(!isLogin)
-        }else if(loginStatus === SUCCEEDED){
+        }else if(loginStatus === SUCCEEDED && accessToken){
+            sessionStorage.setItem('accessToken', accessToken)
             navigate('/')
         }
-    }, [registrationStatus, loginStatus, navigate, isLogin])
+    }, [registrationStatus, loginStatus, navigate, isLogin, accessToken])
 
     return (
         <MainWrapper>

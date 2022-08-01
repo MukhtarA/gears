@@ -58,7 +58,8 @@ const SearchItem = ({
                     {inStock && <p style={{marginTop: 3, fontSize: 12}}>{inStock > 20 ? 'В наличии' : `Осталось ${inStock}`}</p>}
                     <CounterButton handleAddToCart={handleAddToCart} inStock={inStock} data={data} />
                 </ButtonWrapper>
-            </>}
+            </>
+            }
             {matches &&
              <>
                  {type === 'header' ?

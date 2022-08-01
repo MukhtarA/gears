@@ -5,7 +5,7 @@ import {selectorSearchData, selectorSearchStatus} from "../../components/SearchB
 import {MainWrapper} from "./style";
 import SearchItem from "../../components/SearchItem";
 import {useCallback} from "react";
-import {addToCart, selectorCart} from "../cart-page/slice";
+import {addItemToCart, addToCart, selectorCart} from "../cart-page/slice";
 import {ItemStyled} from "../../components/SearchItem/style";
 
 const SearchResultPage = () => {
@@ -14,6 +14,18 @@ const SearchResultPage = () => {
     const searchStatus = useSelector(selectorSearchStatus)
 
     const handleAddToCart = useCallback((data, count) => () => {
+        dispatch(addItemToCart({
+            "part_number": data?.partNumber,
+            "brand": data?.brand,
+            "booking": "test",
+            "delivery": "test",
+            "destination": "ALA",
+            "transport": "fly",
+            "quantity": count,
+            "price": data?.price,
+            "currency": "USD",
+            "reference": "test"
+        }))
         dispatch(addToCart({data, count}))
     }, [dispatch])
 

@@ -28,7 +28,7 @@ export const NavMenu = styled.ul`
     top: 8vh;
     right: 0;
     width: 100%;
-    height: 93vh;
+    height: 100vh;
     margin: 0;
     background-color: #fff;
     flex-direction: column;
