@@ -18,13 +18,14 @@ import {FontAwesomeIconStyled} from "../../components/NavigationBar/style";
 import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "../login-page/style";
 import {LinkStyled} from "../../components/Footer/style";
+import {useNavigate} from "react-router-dom";
 
 const CartPage = () =>  {
     const dispatch = useDispatch()
     const cart = useSelector(selectorCart)
     const cartPrice = useMemo(() => computedCardPrice(cart), [cart])
     const cartItemsAmount = useMemo(() => computedCardItemsAmount(cart), [cart])
-
+    const navigate = useNavigate()
     const initialCartData = useSelector(selectorInitialCartData)
     const initialCartStatus = useSelector(selectorInitialCartStatus)
 
@@ -72,6 +73,7 @@ const CartPage = () =>  {
                 "currency": item.currency
             }))
         ))
+        navigate('/cart/success')
     }, [])
     const ItemStyled = styled.div`
       flex: 0 0 160px;

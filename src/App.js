@@ -15,6 +15,7 @@ import PaymentInfoPage from "./features/payment-info-page";
 import styled from "@emotion/styled";
 import Footer from "./components/Footer";
 import PersonalPage from "./features/personal-page";
+import SuccessPage from "./features/success-page";
 
 const HeaderBlock = styled.div`
   @media (max-width: 768px) {
@@ -53,6 +54,7 @@ function App() {
                             <Route path="/delivery-info" element={<DeliveryInfoPage />} />
                             <Route path="/payment-info" element={<PaymentInfoPage />} />
                             <Route path="/personal" element={<PersonalPage />} />
+                            <Route path="/cart/success" element={<SuccessPage />} />
                         </Routes>
                     </div>
                 <Footer style={{ padding: `0 ${matches ? '120px': 0}`}} />
