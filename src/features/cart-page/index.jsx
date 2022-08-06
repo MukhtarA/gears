@@ -1,7 +1,15 @@
 import {MainWrapper} from "../search-result-page/style";
 import {useDispatch, useSelector} from "react-redux";
-import {addItemToCart, addToCart, selectorCart} from "./slice";
-import {useCallback, useMemo} from "react";
+import {
+    addItemToCart,
+    addToCart,
+    confirmToOrder,
+    getCart,
+    selectorCart,
+    selectorInitialCartData,
+    selectorInitialCartStatus
+} from "./slice";
+import {useCallback, useEffect, useMemo} from "react";
 import {computedCardItemsAmount, computedCardPrice} from "../../helpers/computed";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CounterButton from "../../components/SearchItem/components/CounterButtons";
@@ -16,6 +24,9 @@ const CartPage = () =>  {
     const cart = useSelector(selectorCart)
     const cartPrice = useMemo(() => computedCardPrice(cart), [cart])
     const cartItemsAmount = useMemo(() => computedCardItemsAmount(cart), [cart])
+
+    const initialCartData = useSelector(selectorInitialCartData)
+    const initialCartStatus = useSelector(selectorInitialCartStatus)
 
     const handleAddToCart = useCallback((data, count) => () => {
         dispatch(addItemToCart({
@@ -50,9 +61,25 @@ const CartPage = () =>  {
         dispatch(addToCart({data, count}))
     }, [dispatch])
 
+    console.log(cart.map((item) => item.id))
+
+    const handleConfirmToOrder = useCallback(() => {
+        dispatch(confirmToOrder(
+            initialCartData.map((item) => ({
+                "item_id": item.id,
+                "lines": 2,
+                "amount": item.quantity,
+                "currency": item.currency
+            }))
+        ))
+    }, [])
     const ItemStyled = styled.div`
       flex: 0 0 160px;
     `
+
+    useEffect(() => {
+        dispatch(getCart())
+    }, [dispatch])
 
     return (
         <MainWrapper>
@@ -86,7 +113,7 @@ const CartPage = () =>  {
                 </h3>
             }
 
-            {cart.length ? <Button style={{ width: 'fit-content', textAlign: 'center', borderRadius: 8 }}><LinkStyled style={{ color: '#fff' }} to="/">Оформить заказ</LinkStyled></Button> : null}
+            {cart.length ? <Button onClick={handleConfirmToOrder} style={{ width: 'fit-content', textAlign: 'center', borderRadius: 8 }}>Оформить заказ</Button> : null}
         </MainWrapper>
     );
 }

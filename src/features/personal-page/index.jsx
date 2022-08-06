@@ -39,15 +39,15 @@ const PersonalPage = () =>  {
 
                 <InputWrapper>
                     <label>Логин</label>
-                    <Input value={loginInput} onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
+                    <Input style={{ width: '80%' }} value={loginInput} onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
                     <label>ИИН</label>
-                    <Input value={iin} onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
+                    <Input style={{ width: '80%' }} value={iin} onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
                     <label>ФИО</label>
-                    <Input value={fullName} onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
+                    <Input style={{ width: '80%' }} value={fullName} onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
                     <label>Номер телефона</label>
-                    <Input value={number} onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
+                    <Input style={{ width: '80%' }} value={number} onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
                     <label>Email</label>
-                    <Input value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
+                    <Input style={{ width: '80%' }} value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
                 </InputWrapper>
             </div>
             <Button style={{ borderRadius: 8 }} onClick={updateUserData}>Сохранить изменения</Button>
