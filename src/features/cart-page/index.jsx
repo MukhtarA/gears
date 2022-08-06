@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import {FontAwesomeIconStyled} from "../../components/NavigationBar/style";
 import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "../login-page/style";
+import {LinkStyled} from "../../components/Footer/style";
 
 const CartPage = () =>  {
     const dispatch = useDispatch()
@@ -85,7 +86,7 @@ const CartPage = () =>  {
                 </h3>
             }
 
-            <Button style={{ width: 'fit-content', textAlign: 'center', borderRadius: 8 }}>Оформить заказ</Button>
+            {cart.length ? <Button style={{ width: 'fit-content', textAlign: 'center', borderRadius: 8 }}><LinkStyled style={{ color: '#fff' }} to="/">Оформить заказ</LinkStyled></Button> : null}
         </MainWrapper>
     );
 }
