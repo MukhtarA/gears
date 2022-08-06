@@ -8,6 +8,7 @@ import CounterButton from "../../components/SearchItem/components/CounterButtons
 import styled from "@emotion/styled";
 import {FontAwesomeIconStyled} from "../../components/NavigationBar/style";
 import {faClose} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "../login-page/style";
 
 const CartPage = () =>  {
     const dispatch = useDispatch()
@@ -33,6 +34,18 @@ const CartPage = () =>  {
 
     const handleRemoveFromCart = useCallback( (data, count) => (e) => {
         e.preventDefault()
+        dispatch(addItemToCart({
+            "part_number": data?.partNumber,
+            "brand": data?.brand,
+            "booking": "test",
+            "delivery": "test",
+            "destination": "ALA",
+            "transport": "fly",
+            "quantity": count,
+            "price": data?.price,
+            "currency": "USD",
+            "reference": "test"
+        }))
         dispatch(addToCart({data, count}))
     }, [dispatch])
 
@@ -71,6 +84,8 @@ const CartPage = () =>  {
                     В корзине нет товаров
                 </h3>
             }
+
+            <Button style={{ width: 'fit-content', textAlign: 'center', borderRadius: 8 }}>Оформить заказ</Button>
         </MainWrapper>
     );
 }

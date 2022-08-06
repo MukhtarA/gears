@@ -11,12 +11,51 @@ const initialState = {
         data: null,
         status: 'idle',
         error: null
+    },
+    initialCartList: {
+        data: null,
+        status: 'idle',
+        error: null
+    },
+    confirmToCartList: {
+        data: null,
+        status: 'idle',
+        error: null
+    },
+    confirmToOrderList: {
+        data: null,
+        status: 'idle',
+        error: null
     }
 }
 
 
 export const addItemToCart = createAsyncThunk('cart/add', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/add", data, {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
+})
+
+export const getCart = createAsyncThunk('cart/get', async () => {
+    return axios.get("https://salty-journey-46630.herokuapp.com/api/v2/cart/items", {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
+})
+
+export const confirmToCart = createAsyncThunk('', async (data) => {
+    return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/confirm", data, {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
+})
+
+export const confirmToOrder = createAsyncThunk('', async (data) => {
+    return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/order", data, {
         headers: {
             'Authorization': sessionStorage.getItem('accessToken')
         }
@@ -37,6 +76,9 @@ const cartSlice = createSlice({
             }else {
                 state.cart = [...state.cart, action.payload]
             }
+        },
+        setInitialCart (state, action) {
+            state.cart = action.payload
         }
     },
     extraReducers: {
@@ -49,12 +91,46 @@ const cartSlice = createSlice({
         },
         [addItemToCart.rejected]: (state, action) => {
             handleRejected(state.addToCartList, action)
+        },
+        [getCart.pending]: (state) => {
+            handlePending(state.initialCartList)
+        },
+        [getCart.fulfilled]: (state, action) => {
+            state.initialCartList.data = action.payload
+            state.initialCartList.status = SUCCEEDED
+        },
+        [getCart.rejected]: (state, action) => {
+            handleRejected(state.initialCartList, action)
+        },
+        [confirmToCart.pending]: (state) => {
+            handlePending(state.confirmToCartList)
+        },
+        [confirmToCart.fulfilled]: (state, action) => {
+            state.confirmToCartList.data = action.payload
+            state.confirmToCartList.status = SUCCEEDED
+        },
+        [confirmToCart.rejected]: (state, action) => {
+            handleRejected(state.confirmToCartList, action)
+        },
+        [confirmToOrder.pending]: (state) => {
+            handlePending(state.confirmToOrderList)
+        },
+        [confirmToOrder.fulfilled]: (state, action) => {
+            state.confirmToOrderList.data = action.payload
+            state.confirmToOrderList.status = SUCCEEDED
+        },
+        [confirmToOrder.rejected]: (state, action) => {
+            handleRejected(state.confirmToOrderList, action)
         }
     }
 })
 
 export const selectorCart = (state) => state.cartSlice.cart
 
-export const {addToCart} = cartSlice.actions
+export const selectorInitialCartData = (state) => state.cartSlice.initialCartList.data
+
+export const selectorInitialCartStatus = (state) => state.cartSlice.initialCartList.status
+
+export const {addToCart, setInitialCart} = cartSlice.actions
 
 export default cartSlice.reducer

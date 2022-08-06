@@ -9,7 +9,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   height: 8vh;
   background-color: #fff;
-
+  overflow-y: hidden;
   @media (max-width: 768px){
     justify-content: space-between;
     padding: 0 30px;
@@ -34,6 +34,7 @@ export const NavMenu = styled.ul`
     flex-direction: column;
     transform: ${({sidebar}) => sidebar ? 'translateX(100%)' : `translateX(4%)`};
     transition: 0.4s ease-in;
+    overflow: hidden;
   }
   
   

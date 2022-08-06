@@ -19,6 +19,16 @@ const initialState = {
         data: null,
         status: 'idle',
         error: null
+    },
+    userDataList: {
+        data: null,
+        status: 'idle',
+        error: null
+    },
+    updateUserDataList: {
+        data: null,
+        status: 'idle',
+        error: null
     }
 
 }
@@ -46,6 +56,22 @@ export const register = createAsyncThunk('login/login', async (data) => {
         url: "https://salty-journey-46630.herokuapp.com/api/v2/registration",
         data: data,
     }).then(response => response.data).then(res => console.log(res))
+})
+
+export const getUserInfo = createAsyncThunk('user/get', async () => {
+    return axios.get("https://salty-journey-46630.herokuapp.com/api/v2/user/info", {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
+})
+
+export const updateUserInfo = createAsyncThunk('user/update', async (data) => {
+    return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/user/update", data, {
+        headers: {
+            'Authorization': sessionStorage.getItem('accessToken')
+        }
+    }).then(response => response.data)
 })
 
 const loginSlice = createSlice({
@@ -78,7 +104,27 @@ const loginSlice = createSlice({
         },
         [checkIp.rejected]: (state, action) => {
             handleRejected(state.checkIpList, action)
-        }
+        },
+        [getUserInfo.pending]: (state) => {
+            handlePending(state.userDataList)
+        },
+        [getUserInfo.fulfilled]: (state, action) => {
+            state.userDataList.data = action.payload
+            state.userDataList.status = SUCCEEDED
+        },
+        [getUserInfo.rejected]: (state, action) => {
+            handleRejected(state.userDataList, action)
+        },
+        [updateUserInfo.pending]: (state) => {
+            handlePending(state.updateUserDataList)
+        },
+        [updateUserInfo.fulfilled]: (state, action) => {
+            state.updateUserDataList.data = action.payload
+            state.updateUserDataList.status = SUCCEEDED
+        },
+        [updateUserInfo.rejected]: (state, action) => {
+            handleRejected(state.updateUserDataList, action)
+        },
     }
 })
 
@@ -90,5 +136,9 @@ export const selectorLoginStatus = (state) => state.loginSlice.loginList.status
 export const selectorRegisterStatus = (state) => state.loginSlice.registerList.status
 
 export const selectorAccessToken = (state) => state.loginSlice.loginList.data?.access_token
+
+export const selectorUserData = (state) => state.loginSlice.userDataList.data
+
+export const updateUserStatus = (state) => state.loginSlice.updateUserDataList.status
 
 export default loginSlice.reducer

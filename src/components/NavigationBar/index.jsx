@@ -5,7 +5,6 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 
 import logo from '../../assets/image/icon.jpeg'
 import minLogo from '../../assets/image/iconMin.jpeg'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Pin} from "../SearchBar/style";
 import {useSelector} from "react-redux";
 import {selectorCart} from "../../features/cart-page/slice";
@@ -24,14 +23,13 @@ const NavigationBar = () => {
     const [matches, setMatches] = useState(
         window.matchMedia("(min-width: 768px)").matches
     )
-
     useEffect(() => {
         window
             .matchMedia("(min-width: 768px)")
             .addEventListener('change', e => setMatches(e.matches));
     }, []);
 
-    const pathNames = ['/', '/login', '/search']
+    const pathNames = ['/', '/login', '/search', '/personal']
     const handleExit = useCallback(() => {
         if (accessToken !== undefined) {
             sessionStorage.removeItem('accessToken')
@@ -45,12 +43,25 @@ const NavigationBar = () => {
         }
     }, [location])
 
+    useEffect(() => {
+        if (!isSidebarOpen){
+            document.body.style.overflow = "hidden"
+            const footer = document.getElementById("footer");
+            footer.style.display = 'none'
+        } else {
+            document.body.style.overflow = "auto"
+            const footer = document.getElementById("footer");
+            footer.style.display = 'flex'
+        }
+    }, [isSidebarOpen])
+
     return(
         <Nav>
             <Link to="/"><img style={{width: matches ? 200 : 100, paddingTop: !matches && 10 }} src={matches ? logo : minLogo} /></Link>
             <NavMenu sidebar={isSidebarOpen}>
-                <NavItem><LinkStyled to="payment-info">Оплата</LinkStyled></NavItem>
-                <NavItem><LinkStyled to="delivery-info">Доставка</LinkStyled></NavItem>
+                <NavItem><LinkStyled to="/personal">Личный кабинет</LinkStyled></NavItem>
+                <NavItem><LinkStyled to="/payment-info">Оплата</LinkStyled></NavItem>
+                <NavItem><LinkStyled to="/delivery-info">Доставка</LinkStyled></NavItem>
                 {!matches &&
                 <div style={{position: 'relative'}}>
                     <NavItem><LinkStyled to="cart">Корзина</LinkStyled></NavItem>
@@ -61,7 +72,7 @@ const NavigationBar = () => {
             </NavMenu>
 
             <MenuWrapper>
-                <FontAwesomeIconStyled icon={faUser} color="darkgray" onClick={() => navigate('/login')} />
+                <FontAwesomeIconStyled icon={faUser} color="darkgray" onClick={() => navigate(accessToken ? '/personal' : '/login')} />
                 <div style={{position: 'relative'}}>
                     <FontAwesomeIconStyled icon={faBars} color="darkgray" onClick={() => setSidebar(!isSidebarOpen)} />
                     {cartItemsAmount ? <Pin>{cartItemsAmount}</Pin> : null}

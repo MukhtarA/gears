@@ -4,7 +4,7 @@ import _ from "lodash"
 import {selectorSearchData, selectorSearchStatus} from "../../components/SearchBar/slice";
 import {MainWrapper} from "./style";
 import SearchItem from "../../components/SearchItem";
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {addItemToCart, addToCart, selectorCart} from "../cart-page/slice";
 import {ItemStyled} from "../../components/SearchItem/style";
 
@@ -12,6 +12,16 @@ const SearchResultPage = () => {
     const dispatch = useDispatch()
     const searchData = useSelector(selectorSearchData)
     const searchStatus = useSelector(selectorSearchStatus)
+
+    const [matches, setMatches] = useState(
+        window.matchMedia("(min-width: 768px)").matches
+    )
+
+    useEffect(() => {
+        window
+            .matchMedia("(min-width: 768px)")
+            .addEventListener('change', e => setMatches(e.matches));
+    }, []);
 
     const handleAddToCart = useCallback((data, count) => () => {
         dispatch(addItemToCart({
@@ -32,6 +42,7 @@ const SearchResultPage = () => {
     return (
         <MainWrapper>
             <SearchItem
+                style={{ borderBottom: !matches && 'none' }}
                 type="header"
                 brand="Производитель"
                 price="Цена"
@@ -40,7 +51,6 @@ const SearchResultPage = () => {
                 deliveryDays="Срок"
                 catalog="Склад"
                 rating="Рейтинг"
-
             />
             {searchData && _.map(searchData, (item) =>
                 <SearchItem
