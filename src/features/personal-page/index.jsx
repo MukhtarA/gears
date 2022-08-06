@@ -13,11 +13,11 @@ const PersonalPage = () =>  {
 
     const userData = useSelector(selectorUserData)
 
-    const [loginInput, setLogin] = useState(userData.username)
-    const [iin, setIin] = useState(userData.iin)
-    const [fullName, setFullName] = useState(userData.full_name)
-    const [number, setNumber] = useState(userData.phone_number)
-    const [email, setEmail] = useState(userData.email)
+    const [loginInput, setLogin] = useState(userData?.username)
+    const [iin, setIin] = useState(userData?.iin)
+    const [fullName, setFullName] = useState(userData?.full_name)
+    const [number, setNumber] = useState(userData?.phone_number)
+    const [email, setEmail] = useState(userData?.email)
 
     const updateUserData = useCallback(() => {
         dispatch(updateUserInfo({

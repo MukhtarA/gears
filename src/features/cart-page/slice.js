@@ -54,7 +54,7 @@ export const confirmToCart = createAsyncThunk('', async (data) => {
     }).then(response => response.data)
 })
 
-export const confirmToOrder = createAsyncThunk('', async (data) => {
+export const confirmToOrder = createAsyncThunk('confirm/order', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/order", data, {
         headers: {
             'Authorization': sessionStorage.getItem('accessToken')

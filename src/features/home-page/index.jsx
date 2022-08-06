@@ -16,7 +16,6 @@ const MainPage = () =>  {
 
     useEffect(() => {
         if(initialCartStatus === SUCCEEDED && initialCartData){
-            dispatch(setInitialCart(initialCartData))
         }
 
     },[dispatch, initialCartStatus, initialCartData])

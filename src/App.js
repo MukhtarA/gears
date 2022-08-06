@@ -40,11 +40,11 @@ function App() {
         <Provider store={store}>
             <BrowserRouter>
                 <div style={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
-                <HeaderBlock>
+                <HeaderBlock style={{ padding: '0 80px'}} >
                     <NavigationBar/>
                     <SearchBar />
                 </HeaderBlock>
-                    <div style={{ paddingBottom: matches ? 200 : 400, overflow: 'hidden' }}>
+                    <div style={{ overflow: 'hidden', padding: `0 80px ${matches ? 300 : 400}px 80px ` }}>
                         <Routes >
                             <Route path="/" element={<HomePage/>}/>
                             <Route path="/login" element={<LoginPage/>}/>
@@ -55,7 +55,7 @@ function App() {
                             <Route path="/personal" element={<PersonalPage />} />
                         </Routes>
                     </div>
-                <Footer />
+                <Footer style={{  padding: '0 80px' }} />
                 </div>
 
             </BrowserRouter>
