@@ -43,7 +43,7 @@ const PersonalPage = () =>  {
                     <label>Логин</label>
                     <Input style={{ width: '80%' }} value={loginInput} onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
                     <label>Имя</label>
-                    <Input style={{ width: '80%' }} value={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstName" type="number" placeholder="Имя" maxLength="12"/>
+                    <Input style={{ width: '80%' }} value={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="Имя"/>
                     <label>Фамилия</label>
                     <Input style={{ width: '80%' }} value={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Фамилия"/>
                     <label>Номер телефона</label>
