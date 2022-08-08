@@ -26,12 +26,12 @@ const LoginPage = () =>  {
     }, [dispatch, loginInput, password])
 
     useEffect(() => {
-     if(loginStatus === SUCCEEDED && accessToken){
-            sessionStorage.setItem('accessToken', accessToken)
+     if(loginStatus === SUCCEEDED){
+            localStorage.setItem('accessToken', accessToken)
             setTimeout(() =>
              navigate('/'), 5000)
             }
-    }, [registrationStatus, loginStatus, navigate, isLogin, accessToken])
+    }, [registrationStatus, loginStatus, navigate])
 
     return (
         <MainWrapper>

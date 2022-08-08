@@ -61,7 +61,7 @@ export const register = createAsyncThunk('login/login', async (data) => {
 export const getUserInfo = createAsyncThunk('user/get', async () => {
     return axios.get("https://salty-journey-46630.herokuapp.com/api/v2/user/info", {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -69,7 +69,7 @@ export const getUserInfo = createAsyncThunk('user/get', async () => {
 export const updateUserInfo = createAsyncThunk('user/update', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/user/update", data, {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -77,6 +77,11 @@ export const updateUserInfo = createAsyncThunk('user/update', async (data) => {
 const loginSlice = createSlice({
     name: 'loginSlice',
     initialState,
+    reducers: {
+        clearLoginState (state) {
+            state = initialState
+        }
+    },
     extraReducers: {
         [login.pending]: (state) => {
             handlePending(state.loginList)
@@ -140,5 +145,7 @@ export const selectorAccessToken = (state) => state.loginSlice.loginList.data?.a
 export const selectorUserData = (state) => state.loginSlice.userDataList.data
 
 export const updateUserStatus = (state) => state.loginSlice.updateUserDataList.status
+
+export const {clearLoginState} = loginSlice.actions
 
 export default loginSlice.reducer

@@ -7,9 +7,9 @@ import logo from '../../assets/image/icon.jpeg'
 import minLogo from '../../assets/image/iconMin.jpeg'
 import {Pin} from "../SearchBar/style";
 import {useDispatch, useSelector} from "react-redux";
-import {clearState, selectorCart} from "../../features/cart-page/slice";
+import {clearCartState, clearState, selectorCart} from "../../features/cart-page/slice";
 import {computedCardItemsAmount, computedCardPrice} from "../../helpers/computed";
-import {selectorUserData} from "../../features/login-page/slice";
+import {clearLoginState, selectorUserData} from "../../features/login-page/slice";
 
 const NavigationBar = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const NavigationBar = () => {
     const userData = useSelector(selectorUserData)
 
     const [isSidebarOpen, setSidebar] = useState(true)
-    const accessToken = sessionStorage.getItem('accessToken')
+    const accessToken = localStorage.getItem('accessToken')
 
     const [matches, setMatches] = useState(
         window.matchMedia("(min-width: 768px)").matches
@@ -34,8 +34,9 @@ const NavigationBar = () => {
     const pathNames = ['/', '/login', '/search', '/registration']
     const handleExit = useCallback(() => {
         if (accessToken !== undefined) {
-            sessionStorage.removeItem('accessToken')
-            dispatch(clearState())
+            dispatch(clearCartState())
+            dispatch(clearLoginState())
+            localStorage.removeItem("accessToken")
             navigate('/')
         }
     }, [dispatch, navigate, accessToken])

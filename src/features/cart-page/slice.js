@@ -33,7 +33,7 @@ const initialState = {
 export const addItemToCart = createAsyncThunk('cart/add', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/add", data, {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -41,7 +41,7 @@ export const addItemToCart = createAsyncThunk('cart/add', async (data) => {
 export const getCart = createAsyncThunk('cart/get', async () => {
     return axios.get("https://salty-journey-46630.herokuapp.com/api/v2/cart/items", {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -49,7 +49,7 @@ export const getCart = createAsyncThunk('cart/get', async () => {
 export const confirmToCart = createAsyncThunk('', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/confirm", data, {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -57,7 +57,7 @@ export const confirmToCart = createAsyncThunk('', async (data) => {
 export const confirmToOrder = createAsyncThunk('confirm/order', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/cart/order", data, {
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -80,7 +80,7 @@ const cartSlice = createSlice({
         setInitialCart (state, action) {
             state.cart = action.payload
         },
-        clearState (state) {
+        clearCartState (state) {
             state = initialState
 }
     },
@@ -134,6 +134,6 @@ export const selectorInitialCartData = (state) => state.cartSlice.initialCartLis
 
 export const selectorInitialCartStatus = (state) => state.cartSlice.initialCartList.status
 
-export const {addToCart, setInitialCart, clearState} = cartSlice.actions
+export const {addToCart, setInitialCart, clearCartState} = cartSlice.actions
 
 export default cartSlice.reducer
