@@ -14,8 +14,8 @@ const PersonalPage = () =>  {
     const userData = useSelector(selectorUserData)
 
     const [loginInput, setLogin] = useState(userData?.username)
-    const [iin, setIin] = useState(userData?.iin)
-    const [fullName, setFullName] = useState(userData?.full_name)
+    const [lastName, setLastName] = useState(userData?.last_name)
+    const [firstName, setFirstName] = useState(userData?.first_name)
     const [number, setNumber] = useState(userData?.phone_number)
     const [email, setEmail] = useState(userData?.email)
 
@@ -23,27 +23,29 @@ const PersonalPage = () =>  {
         dispatch(updateUserInfo({
             "id": userData?.id,
             "username": loginInput,
-            "iin": iin,
-            "full_name": fullName,
+            "first_name": firstName,
+            "last_name": lastName,
             "phone_number": number,
             "email": email
         }))
-    }, [dispatch, userData, loginInput, iin, fullName, number, email])
+    }, [dispatch, userData, loginInput, firstName, lastName, number, email])
 
     return (
         <MainWrapper>
             <h1>Личный кабинет</h1>
+            <label>Имя: {userData?.first_name}</label>
+            <label>Фамилия: {userData?.last_name}</label>
+            <label>Баланс: {userData?.balance} тг</label>
 
             <div style={{ border: '1px solid darkgray', padding: 20, display: 'flex', flexDirection: 'column', borderRadius: 8}}>
-                <h3 style={{ marginBottom: 10, marginTop: 0}}>Личные данные</h3>
-
+                <h3 style={{ marginBottom: 10, marginTop: 0}}>Редактировать личные данные</h3>
                 <InputWrapper>
                     <label>Логин</label>
                     <Input style={{ width: '80%' }} value={loginInput} onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
-                    <label>ИИН</label>
-                    <Input style={{ width: '80%' }} value={iin} onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
-                    <label>ФИО</label>
-                    <Input style={{ width: '80%' }} value={fullName} onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
+                    <label>Имя</label>
+                    <Input style={{ width: '80%' }} value={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstName" type="number" placeholder="Имя" maxLength="12"/>
+                    <label>Фамилия</label>
+                    <Input style={{ width: '80%' }} value={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Фамилия"/>
                     <label>Номер телефона</label>
                     <Input style={{ width: '80%' }} value={number} onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
                     <label>Email</label>

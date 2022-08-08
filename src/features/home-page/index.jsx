@@ -30,7 +30,7 @@ const MainPage = () =>  {
 
     return (
         <MainWrapper>
-            <Carousel showThumbs={false}>
+            <Carousel id="carousel" showThumbs={false}>
                 <div><img src={sliderItem1} /></div>
                 <div><img src={sliderItem2} /></div>
             </Carousel>

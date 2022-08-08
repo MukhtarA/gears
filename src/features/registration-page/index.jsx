@@ -14,8 +14,8 @@ const RegistrationPage = () =>  {
     const registrationStatus = useSelector(selectorRegisterStatus)
     const [password, setPassword] = useState('')
     const [loginInput, setLogin] = useState('')
-    const [iin, setIin] = useState('')
-    const [fullName, setFullName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [firstName, setFirstName] = useState('')
     const [number, setNumber] = useState('')
     const [email, setEmail] = useState('')
     const accessToken = useSelector(selectorAccessToken)
@@ -24,14 +24,15 @@ const RegistrationPage = () =>  {
             dispatch(register({
                 "username": loginInput,
                 "password": password,
-                "iin": iin,
-                "full_name": fullName,
+                "first_name": firstName,
+                "last_name": lastName,
                 "phone_number": number,
                 "role_id": 1,
+                "city_id":2,
                 "email": email,
                 "partner_id": 1
             }))
-    }, [dispatch, loginInput, password, iin, fullName, number, email])
+    }, [dispatch, loginInput, password, firstName, lastName, number, email])
 
     useEffect(() => {
         if (registrationStatus === SUCCEEDED){
@@ -52,8 +53,8 @@ const RegistrationPage = () =>  {
                 <InputWrapper>
                     <Input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
                     <Input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
-                    <Input onChange={(e) => setIin(e.target.value)} id="iin" type="number" placeholder="ИИН" maxLength="12"/>
-                    <Input onChange={(e) => setFullName(e.target.value)} id="fullName" placeholder="ФИО"/>
+                    <Input onChange={(e) => setFirstName(e.target.value)} id="firstName" type="number" placeholder="Имя" maxLength="12"/>
+                    <Input onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Фамилия"/>
                     <Input onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
                     <Input onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
                 </InputWrapper>

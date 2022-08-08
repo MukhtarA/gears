@@ -48,11 +48,15 @@ const NavigationBar = () => {
         if (!isSidebarOpen){
             document.body.style.overflow = "hidden"
             const footer = document.getElementById("footer");
+
             footer.style.display = 'none'
+
         } else {
             document.body.style.overflow = "auto"
             const footer = document.getElementById("footer");
+
             footer.style.display = 'flex'
+
         }
     }, [isSidebarOpen])
 
