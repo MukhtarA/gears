@@ -9,6 +9,7 @@ import {Pin} from "../SearchBar/style";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectorCart} from "../../features/cart-page/slice";
 import {computedCardItemsAmount, computedCardPrice} from "../../helpers/computed";
+import {selectorUserData} from "../../features/login-page/slice";
 
 const NavigationBar = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const NavigationBar = () => {
     const dispatch = useDispatch();
     const cart = useSelector(selectorCart)
     const cartItemsAmount = useMemo(() => computedCardItemsAmount(cart), [cart])
+    const userData = useSelector(selectorUserData)
 
     const [isSidebarOpen, setSidebar] = useState(true)
     const accessToken = sessionStorage.getItem('accessToken')
@@ -64,7 +66,7 @@ const NavigationBar = () => {
         <Nav>
             <Link to="/"><img style={{width: matches ? 200 : 100, paddingTop: !matches && 10 }} src={matches ? logo : minLogo} /></Link>
             <NavMenu sidebar={isSidebarOpen}>
-                <NavItem><LinkStyled to="/personal">Личный кабинет</LinkStyled></NavItem>
+                <NavItem><LinkStyled to="/personal">{userData ? `${userData?.first_name} ${userData?.balance}` : 'Личный кабинет' }</LinkStyled></NavItem>
                 <NavItem><LinkStyled to="/payment-info">Оплата</LinkStyled></NavItem>
                 <NavItem><LinkStyled to="/delivery-info">Доставка</LinkStyled></NavItem>
                 {!matches &&
