@@ -27,11 +27,11 @@ export const HeadingWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-
+  
   @media (max-width: 768px) {
     width: 100%;
   }
-
+  
 `
 
 export const Button = styled.button`
@@ -56,6 +56,6 @@ export const InputWrapper = styled.div`
 
   @media (max-width: 768px) {
     gap: 10px;
-  }
-
+}
+  
 `

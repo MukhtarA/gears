@@ -16,6 +16,7 @@ import styled from "@emotion/styled";
 import Footer from "./components/Footer";
 import PersonalPage from "./features/personal-page";
 import SuccessPage from "./features/success-page";
+import RegistrationPage from "./features/registration-page";
 
 const HeaderBlock = styled.div`
   @media (max-width: 768px) {
@@ -49,6 +50,7 @@ function App() {
                         <Routes >
                             <Route path="/" element={<HomePage/>}/>
                             <Route path="/login" element={<LoginPage/>}/>
+                            <Route path="/registration" element={<RegistrationPage/>}/>
                             <Route path="/search" element={<SearchResultPage />} />
                             <Route path="/cart" element={<CartPage/>} />
                             <Route path="/delivery-info" element={<DeliveryInfoPage />} />

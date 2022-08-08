@@ -61,7 +61,7 @@ export const register = createAsyncThunk('login/login', async (data) => {
 export const getUserInfo = createAsyncThunk('user/get', async () => {
     return axios.get("https://salty-journey-46630.herokuapp.com/api/v2/user/info", {
         headers: {
-            'Authorization': sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -69,7 +69,7 @@ export const getUserInfo = createAsyncThunk('user/get', async () => {
 export const updateUserInfo = createAsyncThunk('user/update', async (data) => {
     return axios.post("https://salty-journey-46630.herokuapp.com/api/v2/user/update", data, {
         headers: {
-            'Authorization': sessionStorage.getItem('accessToken')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
         }
     }).then(response => response.data)
 })
@@ -89,14 +89,14 @@ const loginSlice = createSlice({
             handleRejected(state.loginList, action)
         },
         [register.pending]: (state) => {
-            handlePending(state.loginList)
+            handlePending(state.registerList)
         },
         [register.fulfilled]: (state, action) => {
-            state.loginList.data = action.payload
-            state.loginList.status = SUCCEEDED
+            state.registerList.data = action.payload
+            state.registerList.status = SUCCEEDED
         },
         [register.rejected]: (state, action) => {
-            handleRejected(state.loginList, action)
+            handleRejected(state.registerList, action)
         },
         [checkIp.fulfilled]: (state, action) => {
             state.checkIpList.data = action.payload

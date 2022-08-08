@@ -6,14 +6,14 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import logo from '../../assets/image/icon.jpeg'
 import minLogo from '../../assets/image/iconMin.jpeg'
 import {Pin} from "../SearchBar/style";
-import {useSelector} from "react-redux";
-import {selectorCart} from "../../features/cart-page/slice";
+import {useDispatch, useSelector} from "react-redux";
+import {clearState, selectorCart} from "../../features/cart-page/slice";
 import {computedCardItemsAmount, computedCardPrice} from "../../helpers/computed";
 
 const NavigationBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const dispatch = useDispatch();
     const cart = useSelector(selectorCart)
     const cartItemsAmount = useMemo(() => computedCardItemsAmount(cart), [cart])
 
@@ -29,13 +29,14 @@ const NavigationBar = () => {
             .addEventListener('change', e => setMatches(e.matches));
     }, []);
 
-    const pathNames = ['/', '/login', '/search', '/personal']
+    const pathNames = ['/', '/login', '/search', '/registration']
     const handleExit = useCallback(() => {
         if (accessToken !== undefined) {
             sessionStorage.removeItem('accessToken')
+            dispatch(clearState())
             navigate('/')
         }
-    }, [navigate, accessToken])
+    }, [dispatch, navigate, accessToken])
 
     useEffect(() => {
         if (!pathNames.includes(location.pathname)){
