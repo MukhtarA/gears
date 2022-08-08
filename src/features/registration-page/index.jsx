@@ -53,7 +53,7 @@ const RegistrationPage = () =>  {
                 <InputWrapper>
                     <Input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>
                     <Input onChange={(e) => setPassword(e.target.value)} id="password" type="password" placeholder="Пароль"/>
-                    <Input onChange={(e) => setFirstName(e.target.value)} id="firstName" type="number" placeholder="Имя" maxLength="12"/>
+                    <Input onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="Имя"/>
                     <Input onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Фамилия"/>
                     <Input onChange={(e) => setNumber(e.target.value)} id="phoneNumber" type="number" placeholder="Номер телефона"/>
                     <Input onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email"/>
