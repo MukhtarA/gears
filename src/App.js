@@ -20,9 +20,10 @@ import RegistrationPage from "./features/registration-page";
 
 const HeaderBlock = styled.div`
   @media (max-width: 768px) {
-    position: sticky;
     width: 100%;
     top: 0;
+    position: sticky;
+    z-index: 5;
   }
 `
 

@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {SearchButton} from "../../components/SearchBar/style";
 import {useDispatch, useSelector} from "react-redux";
 import {login, register, selectorAccessToken, selectorLoginStatus, selectorRegisterStatus} from "./slice";
-import {SUCCEEDED} from "../../constants/sliceConstants";
+import {FAILED, SUCCEEDED} from "../../constants/sliceConstants";
 import Alert from "@mui/material/Alert";
 
 const LoginPage = () =>  {
@@ -28,9 +28,9 @@ const LoginPage = () =>  {
     useEffect(() => {
      if(loginStatus === SUCCEEDED){
             localStorage.setItem('accessToken', accessToken)
-            setTimeout(() =>
-             navigate('/'), 5000)
-            }
+            setTimeout(() =>{
+                navigate('/')
+            }, 5000)}
     }, [registrationStatus, loginStatus, navigate])
 
     return (
@@ -40,7 +40,8 @@ const LoginPage = () =>  {
                 <p style={{ color: 'blue', cursor: 'pointer', margin: 0 }} onClick={() => navigate('/registration')}>Регистрация</p>
             </HeadingWrapper>
             <div style={{ textAlign: 'center', marginTop: 30}}>
-                { loginStatus !== 'idle' && <Alert style={{ marginBottom: 10 }} severity={loginStatus === SUCCEEDED ? 'success' : 'error'}>{loginStatus === SUCCEEDED ? 'Авторизация прошла успешно' : 'Неправельный логин или пароль'}</Alert>}
+                { loginStatus === SUCCEEDED ?  <Alert style={{ marginBottom: 10 }} severity={'success'}>Авторизация прошла успешно</Alert> : null}
+                { loginStatus === FAILED ?  <Alert style={{ marginBottom: 10 }} severity={'error'}>Неправельный логин или пароль</Alert> : null}
 
                 <InputWrapper>
                     <Input onChange={(e) => setLogin(e.target.value)} id="login" placeholder="Логин"/>

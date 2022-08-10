@@ -7,8 +7,8 @@ import logo from '../../assets/image/icon.jpeg'
 import minLogo from '../../assets/image/iconMin.jpeg'
 import {Pin} from "../SearchBar/style";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCartState, clearState, selectorCart} from "../../features/cart-page/slice";
-import {computedCardItemsAmount, computedCardPrice} from "../../helpers/computed";
+import {clearCartState, selectorCart} from "../../features/cart-page/slice";
+import {computedCardItemsAmount} from "../../helpers/computed";
 import {clearLoginState, selectorUserData} from "../../features/login-page/slice";
 
 const NavigationBar = () => {
@@ -37,7 +37,7 @@ const NavigationBar = () => {
             dispatch(clearCartState())
             dispatch(clearLoginState())
             localStorage.removeItem("accessToken")
-            navigate('/')
+            window.location.reload()
         }
     }, [dispatch, navigate, accessToken])
 
@@ -46,22 +46,6 @@ const NavigationBar = () => {
             setSidebar(!isSidebarOpen)
         }
     }, [location])
-
-    useEffect(() => {
-        if (!isSidebarOpen){
-            document.body.style.overflow = "hidden"
-            const footer = document.getElementById("footer");
-
-            footer.style.display = 'none'
-
-        } else {
-            document.body.style.overflow = "auto"
-            const footer = document.getElementById("footer");
-
-            footer.style.display = 'flex'
-
-        }
-    }, [isSidebarOpen])
 
     return(
         <Nav>
